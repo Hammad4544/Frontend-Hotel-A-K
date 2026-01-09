@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>A&K Grand Hotel</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body class="bg-[#F9F5F2] font-sans m-0 overflow-x-hidden">
+    <!-- Hero Section -->
+    <section class="relative w-full h-[60vh] md:h-[80vh] overflow-hidden">
+        <!-- Hero Image -->
+        <img src="/images/1.png" alt="Hero Image" class="w-full h-full object-cover">
+    
+        <!-- Overlay -->
+        <div class="absolute inset-0 bg-black/40"></div>
+    
+        <!-- Content -->
+        <div class="absolute inset-0 flex flex-col items-center justify-center text-center text-white px-4 z-10">
+            <h1 class="text-4xl md:text-5xl font-bold mb-3">Welcome to A&K Grand Hotel</h1>
+            <p class="text-base md:text-lg mb-5">Experience luxury and comfort like never before</p>
+            <a href="/booking"
+                class="bg-[#FF6B6B] hover:bg-[#FF4C4C] text-white font-semibold px-5 py-2.5 rounded-lg transition">
+                Book Now
+            </a>
+        </div>
+    </section>
+
+    <section>
+    <h2 class="text-2xl md:text-3xl font-bold font-serif text-center mb-8 py-5">Popular Rooms </h2>
+
+    <div class="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-10 justify-items-center px-4 ">
+
+        @for (room of RoomsList ; track room.roomId) {
+        <div class="card border-2 border-[#C9A24D] rounded-md shadow overflow-hidden relative w-full">
+            <div class="card-img">
+                <img class="w-full h-[250px] object-cover" [src]="'http://localhost:5192' + room.images[0]" [alt]="" />
+            </div>
+            <div class="card-body px-2 py-2">
+                <h4 class="text-black text-xl font-serif font-bold pb-2 text-center">
+                    {{ room.type }} Room
+                </h4>
+                <hr class="py-2">
+                <h3 class="font-medium">{{ room.number }}</h3>
+                <div class="flex justify-between items-center">
+                    <span>{{ room.pricePerNight | currency : "GBP" }} </span>
+                    <div class="flex items-center">
+                        <i class="fas fa-star text-yellow-300"></i>
+                        <span class="text-gray-500">5</span>
+                    </div>
+                </div>
+            </div>
+
+            <button [routerLink]="['/details', room.roomId]" class="btn-main text-white py-2 px-10 border rounded">
+                View Details
+            </button>
+
+        </div>
+
+        }
+
+    </div>
+    </section>
+
+</body>
+
+</html>

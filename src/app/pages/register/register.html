@@ -1,0 +1,78 @@
+<section class="w-1/2 mx-auto bg-gray-50 p-4 rounded border shadow">
+  <h1 class="text-3xl text-center text-green-600 font-light">Register Now</h1>
+
+  <form [formGroup]="RegisterForm" (ngSubmit)="submitForm()">
+
+    <!-- FullName -->
+    <div class="mb-1" *ngIf="RegisterForm.get('FullName') as nameControl">
+      <label for="name" class="block mb-2 text-sm font-medium text-gray-900">FullName</label>
+      <input type="text" id="name" formControlName="FullName"
+        class="bg-white border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5" />
+
+      <div *ngIf="nameControl.touched && nameControl.errors"
+        class="flex p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-100">
+        <ul class="list-disc list-inside">
+          <li *ngIf="nameControl.errors['required']">FullName is required</li>
+          <li *ngIf="nameControl.errors['minlength']">Minimum 9 characters</li>
+          <li *ngIf="nameControl.errors['maxlength']">Maximum 50 characters</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Email -->
+    <div class="mb-1" *ngIf="RegisterForm.get('Email') as emailControl">
+      <label for="email" class="block mb-2 text-sm font-medium text-gray-900">Email</label>
+      <input type="email" id="email" formControlName="Email"
+        class="bg-white border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5" />
+
+      <div *ngIf="emailControl.touched && emailControl.errors"
+        class="flex p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-100">
+        <ul class="list-disc list-inside">
+          <li *ngIf="emailControl.errors['required']">Email is required</li>
+          <li *ngIf="emailControl.errors['email']">Enter valid email</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Password -->
+    <div class="mb-1" *ngIf="RegisterForm.get('Password') as passwordControl">
+      <label for="password" class="block mb-2 text-sm font-medium text-gray-900">Password</label>
+      <input type="password" id="password" formControlName="Password"
+        class="bg-white border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5" />
+
+      <div *ngIf="passwordControl.touched && passwordControl.errors"
+        class="flex p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-100">
+        <ul class="list-disc list-inside">
+          <li *ngIf="passwordControl.errors['required']">Password is required</li>
+          <li *ngIf="passwordControl.errors['pattern']">Password must contain uppercase, number & special char</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- PhoneNumber -->
+    <div class="mb-1" *ngIf="RegisterForm.get('PhoneNumber') as phoneControl">
+      <label for="phone" class="block mb-2 text-sm font-medium text-gray-900">PhoneNumber</label>
+      <input type="text" id="phone" formControlName="PhoneNumber"
+        class="bg-white border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5" />
+
+      <div *ngIf="phoneControl.touched && phoneControl.errors"
+        class="flex p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-100">
+        <ul class="list-disc list-inside">
+          <li *ngIf="phoneControl.errors['required']">Phone is required</li>
+          <li *ngIf="phoneControl.errors['pattern']">Enter valid phone number</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Submit Button -->
+    <button type="submit" [disabled]="isLoading" class="btn-main">
+      SignUp
+      <span *ngIf="isLoading"><i class="fas fa-spin fa-spinner"></i></span>
+    </button>
+
+    <!-- Error / Success messages -->
+    <p *ngIf="msgError" class="bg-red-400 text-white py-2 px-2 border">{{msgError}}</p>
+    <p *ngIf="isSuccess" class="bg-green-400 text-white py-2 px-2 border">{{isSuccess}}</p>
+
+  </form>
+</section>

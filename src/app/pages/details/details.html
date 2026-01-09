@@ -1,0 +1,145 @@
+<!-- slider image -->
+<section>
+    @if (room) {
+    
+    <div class="max-w-6xl mx-auto mt-10 px-4">
+        <!-- Main Image -->
+        <div class="main-image mb-4 w-full flex justify-center">
+            <img [src]="'http://localhost:5192' + selectedImage" alt="Room Image"
+                class="object-contain w-full max-h-[500px] rounded-lg shadow-lg" />
+        </div>
+    
+        <!-- Thumbnails -->
+        <div class="thumbnails flex justify-center gap-4">
+            @for (img of room.images; track img) {
+            <img [src]="'http://localhost:5192' + img" (click)="changeImage(img)" [class.active]="img === selectedImage"
+                [class.border-blue-500]="img === selectedImage"
+                class="w-20 h-20 object-cover rounded-lg border-2 cursor-pointer transition-transform duration-200 hover:scale-105"
+                alt="Room Thumbnail" />
+            }
+        </div>
+    </div>
+    
+    }
+</section>
+
+<section>
+@if (room) {
+
+    <div class="max-w-6xl mx-auto mt-10 px-4">
+
+    <!-- Room Info Section with subtle gradient -->
+    <div class="room-info grid md:grid-cols-2 gap-8 items-start p-6 rounded-lg"
+        style="background: linear-gradient(135deg, #f9f5f2 0%, #e0dcd6 100%);">
+
+        <!-- Left: Room Name & Description -->
+        <div>
+            <h2 class="text-3xl font-semibold text-gray-800 mb-2">{{ room.type }} Room</h2>
+            <div class="h-1 w-30 bg-gray-600 rounded mb-4"></div> 
+            <p class="text-gray-700 leading-relaxed">{{ room.description }} </p>
+
+            <hr class="my-4 border-gray-600" />
+
+            <!-- Amenities Section -->
+            <h2 class="text-xl font-serif text-gray-800 pb-4 ">{{room.type}} Amenities</h2>
+
+            <div class="flex flex-wrap gap-x-8 gap-y-4">
+
+                <div class="flex items-center gap-3 w-[45%]">
+                    <div
+                        class="p-3 bg-gradient-to-br from-blue-100 to-blue-200 rounded-lg shadow-lg hover:from-blue-200 hover:to-blue-300 transition-all duration-300">
+                        <img src="/icons/wifi.svg" alt="Free Wi-Fi" class="h-6">
+                    </div>
+                    <span class="p-3">Free Wi-Fi</span>   
+                </div>
+                
+                <div class="flex items-center gap-3 w-[45%]">
+                    <div
+                        class="p-3 bg-gradient-to-br from-green-100 to-green-200 rounded-lg shadow-lg hover:from-green-200 hover:to-green-300 transition-all duration-300">
+                        <img src="/icons/tv.svg" alt="Flat Screen TV" class="h-6">
+                    </div>
+                    <span class="p-3">Flat Screen TV</span>
+                </div>
+
+                <div class="flex items-center gap-3 w-[45%]">
+                    <div
+                        class="p-3 bg-gradient-to-br from-purple-100 to-purple-200 rounded-lg shadow-lg hover:from-purple-200 hover:to-purple-300 transition-all duration-300">
+                        <img src="/icons/minibar.svg" alt="minibar" class="h-6">
+                    </div>
+                    <span class="p-3">Mini Bar</span>
+                </div>
+                
+                <div class="flex items-center gap-3 w-[45%]">
+                    <div
+                        class="p-3 bg-gradient-to-br from-yellow-100 to-yellow-200 rounded-lg shadow-lg hover:from-yellow-200 hover:to-yellow-300 transition-all duration-300">
+                        <img src="/icons/roomservice.svg" alt="Room Service" class="h-6">
+                    </div>
+                    <span class="p-3">Room Service</span>
+                </div>
+
+            </div>
+
+
+        </div>
+
+        <!-- Right: Room Price and Book Button -->
+        <div class="flex justify-center md:justify-end">
+            <div class="w-full max-w-sm bg-[#f9f5f2] rounded-lg p-6 shadow-lg border border-gray-200">
+                <p class="text-black text-xl font-serif text-center mb-2">Book Your Stay</p>
+                <hr class="pb-2">
+                <!-- Check-in -->
+                <div>
+                    <label class="block text-sm font-medium text-gray-600 mb-1">
+                        Check In
+                    </label>
+                    <input type="date"
+                        class="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500" />
+                </div>
+
+                <!-- Check-out -->
+                <div>
+                    <label class="block text-sm font-medium text-gray-600 my-2">
+                        Check Out
+                    </label>
+                    <input type="date"
+                        class="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500" />
+                </div>
+
+                <!-- Guests -->
+                <div>
+                    <label class="block text-sm font-medium text-gray-600 my-2">
+                        Guests
+                    </label>
+                    <select
+                        class="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500">
+                        <option>1 Guest</option>
+                        <option>2 Guests</option>
+                        <option>3 Guests</option>
+                        <option>4 Guests</option>
+                    </select>
+                </div>  
+
+                <button [routerLink]="'/booking'" class="w-full btn-main border-yellow-500 mt-4">
+                    Book Now
+                </button>
+            </div>
+        </div>
+
+        </div>
+        
+    </div>
+
+
+
+    
+    
+}
+  
+</section>
+
+
+
+    
+
+
+
