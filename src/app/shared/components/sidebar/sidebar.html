@@ -7,16 +7,35 @@
     </div>
 
     <ul class="menu">
-        <li class="sidebar-item active">Dashboard</li>
-        <li class="sidebar-item">Bookings</li>
-        <li class="sidebar-item">Rooms</li>
-        <li class="sidebar-item">Users</li>
-        <li class="sidebar-item">Reviews</li>
-        <li class="sidebar-item">Settings</li>
+        <li class="sidebar-item" routerLink="/admin/dashboard" routerLinkActive="active"
+        [routerLinkActiveOptions]="{ exact: true }">
+            Dashboard
+        </li>
+    
+        <li class="sidebar-item" routerLink="/admin/bookings" routerLinkActive="active">
+            Bookings
+        </li>
+    
+        <li class="sidebar-item" routerLink="/admin/rooms" routerLinkActive="active">
+            Rooms
+        </li>
+    
+        <li class="sidebar-item" routerLink="/admin/users" routerLinkActive="active">
+            Users
+        </li>
+    
+        <li class="sidebar-item" routerLink="/admin/reviews" routerLinkActive="active">
+            Reviews
+        </li>
+    
+        <li class="sidebar-item" routerLink="/admin/setting" routerLinkActive="active">
+            Settings
+        </li>
     </ul>
 
+
     <div class="logout">
-        <button class="sidebar-item">Logout</button>
+        <button class="sidebar-item" routerLink="/home">Logout</button>
     </div>
 </div>
 

@@ -28,6 +28,14 @@ export class BookingService {
     return this.httpClient.get(`${environment.baseUrl}/api/Booking`);
   }
   
+  updateBookingsByRoomId(roomId: number , data :object): Observable<any>
+  {
+    return this.httpClient.put(`${environment.baseUrl}/api/Booking/${roomId}` , data);
+  }
   
+  deleteBookingsByRoomId(roomId: number): Observable<any>
+  {
+    return this.httpClient.get(`${environment.baseUrl}/api/Booking/${roomId}`);
+  }
   
 }

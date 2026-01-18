@@ -1,11 +1,9 @@
 <div class="flex min-h-screen">
   <app-sidebar></app-sidebar>
+
   <div class="flex-1 bg-gray-100">
     <app-admin-navbar></app-admin-navbar>
-    @defer (on immediate) {
-    <app-dashboard></app-dashboard>
-    } @placeholder {
-    <div class="p-6">Loading Dashboard...</div>
-    }
+
+    <router-outlet></router-outlet>
   </div>
 </div>

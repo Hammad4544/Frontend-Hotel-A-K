@@ -1,0 +1,20 @@
+
+export interface IgetAllBooking {
+    bookingId:    number;
+    userId:       string;
+    roomId:       number;
+    room:         Room;
+    checkInDate:  Date;
+    checkOutDate: Date;
+}
+
+export interface Room {
+    roomId:        number;
+    number:        string;
+    type:          string;
+    pricePerNight: number;
+    isAvailable:   boolean;
+    bookedUntil:   null;
+    description:   string;
+    images:        any[];
+}

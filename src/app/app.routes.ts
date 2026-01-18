@@ -11,20 +11,26 @@ export const routes: Routes = [
   },
 
   // Admin Layout
-{
+  {
   path: 'admin',
   loadComponent: () =>
     import('./layouts/admin-layout/admin-layout')
       .then(c => c.AdminLayout),
   canActivate: [adminGuard],
-  title: 'Admin Dashboard',
+  title: 'AdminDashboard',
   children: [
     {
-      path: 'Dashboard',
+      path: '',
+      redirectTo: 'dashboard',
+      pathMatch: 'full',
+    },
+
+    {
+      path: 'dashboard',
       loadComponent: () =>
         import('./pages/dashboard/dashboard')
           .then(c => c.Dashboard),
-      title: 'Dashboard',
+      title: 'AdminDashboard',
     },
     {
       path: 'bookings',
@@ -40,10 +46,30 @@ export const routes: Routes = [
           .then(c => c.AdminRooms),
       title: 'AdminRooms',
     },
+    {
+      path: 'users',
+      loadComponent: () =>
+        import('./pages/admin-users/admin-users')
+          .then(c => c.AdminUsers),
+      title: 'AdminUsers',
+    },
+    {
+      path: 'reviews',
+      loadComponent: () =>
+        import('./pages/admin-reviews/admin-reviews')
+          .then(c => c.AdminReviews),
+      title: 'AdminReviews',
+    },
+    {
+      path: 'setting',
+      loadComponent: () =>
+        import('./pages/admin-setting/admin-setting')
+          .then(c => c.AdminSetting),
+      title: 'AdminSetting',
+    },
   ],
-},
+  },
 
-  
 
   // Auth Layout
   {
@@ -91,6 +117,14 @@ export const routes: Routes = [
             .then(c => c.Booking),
         canActivate:[authGuard],
         title: 'Booking',
+      },
+      {
+        path: 'payment',
+        loadComponent: () =>
+          import('./pages/payment/payment')
+            .then(c => c.Payment),
+        canActivate:[authGuard],
+        title: 'Payment',
       },
       {
         path: 'connectUs',
