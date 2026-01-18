@@ -16,5 +16,5 @@ export interface Room {
     isAvailable:   boolean;
     bookedUntil:   null;
     description:   string;
-    images:        any[];
+    images:        string[];
 }

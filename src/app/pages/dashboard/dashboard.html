@@ -7,7 +7,7 @@
             <div class="bg-blue-50 text-blue-500 p-2.5 rounded-lg text-lg">📄</div>
             <div>
                 <p class="text-gray-900 text-xs font-bold">Total Bookings</p>
-                <h3 class="text-lg font-bold text-slate-800">1,200</h3>
+                <h3 class="text-lg font-bold text-slate-800">{{stats.totalBookings}}</h3>
             </div>
         </div>
 
@@ -15,7 +15,7 @@
             <div class="bg-yellow-50 text-yellow-500 p-2.5 rounded-lg text-lg">🛏</div>
             <div>
                 <p class="text-gray-900 text-xs font-bold">Rooms</p>
-                <h3 class="text-lg font-bold text-slate-800">24</h3>
+                <h3 class="text-lg font-bold text-slate-800">{{stats.rooms}}</h3>
             </div>
         </div>
 
@@ -23,7 +23,7 @@
             <div class="bg-purple-50 text-purple-500 p-2.5 rounded-lg text-lg">👤</div>
             <div>
                 <p class="text-gray-900 text-xs font-bold">Users</p>
-                <h3 class="text-lg font-bold text-slate-800">500</h3>
+                <h3 class="text-lg font-bold text-slate-800">{{stats.users}}</h3>
             </div>
         </div>
 
@@ -31,7 +31,7 @@
             <div class="bg-green-50 text-green-500 p-2.5 rounded-lg text-lg">💰</div>
             <div>
                 <p class="text-gray-900 text-xs font-bold">Revenue</p>
-                <h3 class="text-lg font-bold text-slate-800">$30,100</h3>
+                <h3 class="text-lg font-bold text-slate-800">${{stats.revenue}}</h3>
             </div>
         </div>
 
@@ -99,38 +99,18 @@
                 </tr>
             </thead>
             <tbody>
-                <tr class="border-b hover:bg-gray-50">
-                    <td class="py-3">Ahmed Ali</td>
-                    <td class="py-3">Deluxe</td>
-                    <td class="py-3">12 Jan</td>
-                    <td class="py-3">15 Jan</td>
+                <tr *ngFor="let booking of AllLatestBooking" class="border-b hover:bg-gray-50">
+                    <td class="py-3">{{ booking.guestName }}</td>
+                    <td class="py-3">{{ booking.room }}</td>
+                    <td class="py-3">{{ booking.checkIn | date:'dd MMM' }}</td>
+                    <td class="py-3">{{ booking.checkOut | date:'dd MMM' }}</td>
                     <td class="py-3">
-                        <span class="bg-green-100 text-green-700 px-3 py-1 rounded-full text-xs">
-                            Confirmed
-                        </span>
-                    </td>
-                </tr>
-
-                <tr class="border-b hover:bg-gray-50">
-                    <td class="py-3">Sara Mohamed</td>
-                    <td class="py-3">Suite</td>
-                    <td class="py-3">10 Jan</td>
-                    <td class="py-3">13 Jan</td>
-                    <td class="py-3">
-                        <span class="bg-yellow-100 text-yellow-700 px-3 py-1 rounded-full text-xs">
-                            Pending
-                        </span>
-                    </td>
-                </tr>
-
-                <tr class="border-b hover:bg-gray-50">
-                    <td class="py-3">Omar Hassan</td>
-                    <td class="py-3">Standard</td>
-                    <td class="py-3">8 Jan</td>
-                    <td class="py-3">11 Jan</td>
-                    <td class="py-3">
-                        <span class="bg-red-100 text-red-700 px-3 py-1 rounded-full text-xs">
-                            Cancelled
+                        <span [ngClass]="{
+                            'bg-green-100 text-green-700': booking.status === 'Confirmed',
+                            'bg-yellow-100 text-yellow-700': booking.status === 'Pending',
+                            'bg-red-100 text-red-700': booking.status === 'Cancelled'
+                        }" class="px-3 py-1 rounded-full text-xs">
+                            {{ booking.status }}
                         </span>
                     </td>
                 </tr>

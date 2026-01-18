@@ -31,7 +31,7 @@ export class Booking implements OnInit {
   }
 
   getAllBookingsForUser(userId: string): void {
-    this.bookingService.getAllBooking().subscribe({
+    this.bookingService.getAllBookingUser().subscribe({
       next: (res: IgetAllBooking[]) => {
         this.bookingList = res.filter((b :IgetAllBooking) => b.userId === userId);
         console.log('User bookings:', this.bookingList);

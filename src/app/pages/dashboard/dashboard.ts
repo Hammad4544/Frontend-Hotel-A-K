@@ -1,18 +1,39 @@
-import { AfterViewInit, Component, Inject, PLATFORM_ID } from '@angular/core';
+import { AfterViewInit, Component, inject, Inject, PLATFORM_ID } from '@angular/core';
 import { isPlatformBrowser } from '@angular/common'; 
 import { Chart } from 'chart.js/auto'; 
 import ChartDataLabels from 'chartjs-plugin-datalabels';
+import { BookingService } from '../../core/services/bookingService/booking-service';
+import { IStats } from '../../shared/interfaces/IStats';
+import { IAllLatestBooking } from '../../shared/interfaces/IALlLatestBooking';
+import { CommonModule, NgClass } from '@angular/common';
 
 
 @Component({
   selector: 'app-dashboard',
-  imports: [],
+  imports: [NgClass,CommonModule],
   templateUrl: './dashboard.html',
   styleUrl: './dashboard.scss',
 })
 export class Dashboard implements AfterViewInit {
 
-  constructor(@Inject(PLATFORM_ID) private platformId: Object) {}
+  constructor(@Inject(PLATFORM_ID) private platformId: Object) { };
+
+  private readonly BookingService = inject(BookingService);
+
+  stats:IStats = {
+    "totalBookings": 0,
+    "rooms": 0,
+    "users": 0,
+    "revenue": 0
+  };
+  AllLatestBooking: IAllLatestBooking[] = [];
+    
+  ngOnInit(): void {
+    this.getStats();
+    this.getAllLatestBooking();
+  }
+
+  
 
  ngAfterViewInit() {
     
@@ -138,4 +159,28 @@ createRevenuePie() {
   });
 }
   
+
+getStats() {
+this.BookingService.getBookingStats().subscribe({
+  next: (res) => {
+    console.log(res);
+    this.stats = res;
+  },  
+  error: (err) => {
+    console.log(err);
+  }
+})  
+}
+  
+getAllLatestBooking() {
+
+  this.BookingService.getAllLatestBookingsAdmin().subscribe({
+    next: (res) => {
+      console.log(res);
+      this.AllLatestBooking = res;
+    },  
+    error: (err) => {
+      console.log(err);
+    }})
+}  
 }

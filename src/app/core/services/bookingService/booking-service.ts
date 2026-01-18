@@ -23,7 +23,7 @@ export class BookingService {
     return this.httpClient.get(`${environment.baseUrl}/api/Booking/room/${roomId}`);
   }
   
-  getAllBooking(): Observable<any>
+  getAllBookingUser(): Observable<any>
   {
     return this.httpClient.get(`${environment.baseUrl}/api/Booking`);
   }
@@ -38,4 +38,16 @@ export class BookingService {
     return this.httpClient.get(`${environment.baseUrl}/api/Booking/${roomId}`);
   }
   
+  // For Admin
+
+  getBookingStats(): Observable<any>
+  {
+    return this.httpClient.get(`${environment.baseUrl}/api/Booking/admin/stats`);
+  }
+
+  getAllLatestBookingsAdmin(): Observable<any>
+  {
+    return this.httpClient.get(`${environment.baseUrl}/api/Booking/admin/AllLatestBooking`);
+
+  }
 }
