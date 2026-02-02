@@ -7,6 +7,7 @@ import { IRoom } from '../../shared/interfaces/iroom';
 import { ToastrService } from 'ngx-toastr';
 import { IUpdateBooking } from '../../shared/interfaces/iupdate-booking';
 import { IBookingRequest } from '../../shared/interfaces/ibooking-request';
+import { CurrencyPipe } from '@angular/common';
 
 interface IBookingRange {
   checkInDate: string;
@@ -18,7 +19,7 @@ interface IBookingRange {
 
 @Component({
   selector: 'app-details',
-  imports: [FormsModule],
+  imports: [FormsModule,CurrencyPipe],
   templateUrl: './details.html',
   styleUrl: './details.scss',
 })

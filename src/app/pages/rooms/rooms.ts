@@ -2,13 +2,13 @@ import { Component, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { RoomService } from '../../core/services/rooms/room-service';
 import { IRoom } from '../../shared/interfaces/iroom';
-import { CurrencyPipe } from '@angular/common';
+import { CurrencyPipe, NgClass } from '@angular/common';
 import { SearchPipe } from '../../shared/pipes/searchPipe';
 import { Router, RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-rooms',
-  imports: [FormsModule , CurrencyPipe, SearchPipe, RouterLink ],
+  imports: [FormsModule, CurrencyPipe, SearchPipe, RouterLink, NgClass],
   templateUrl: './rooms.html',
   styleUrl: './rooms.scss',
 })

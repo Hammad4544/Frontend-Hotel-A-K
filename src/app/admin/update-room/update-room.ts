@@ -3,11 +3,13 @@ import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angula
 import { ActivatedRoute, Router } from '@angular/router';
 import { RoomService } from '../../core/services/rooms/room-service';
 import { IRoom } from '../../shared/interfaces/iroom';
+import { NgClass } from '@angular/common';
+
 
 @Component({
   selector: 'app-update-room',
   templateUrl: './update-room.html',
-  imports: [ReactiveFormsModule],
+  imports: [ReactiveFormsModule, NgClass],
   styleUrls: ['./update-room.scss']
 })
 export class UpdateRoomComponent implements OnInit {

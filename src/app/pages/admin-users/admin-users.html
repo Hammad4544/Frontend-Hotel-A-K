@@ -1,100 +1,102 @@
-<div class="container-fluid mt-4">
-    <div class="card shadow-sm border-0">
+<div class="p-8 bg-[#F8FAFC] min-h-screen">
+    
+    <div class="mb-8 flex flex-col md:flex-row md:items-center justify-between gap-4">
+        <div>
+            <h1 class="text-2xl font-bold text-[#0B1F33]">Manage Users</h1>
+            <p class="text-gray-500 text-sm mt-1">Monitor user activity and manage system permissions.</p>
+        </div>
+        <div class="flex items-center gap-3">
+             <div class="bg-white px-4 py-2 rounded-xl border border-gray-100 shadow-sm flex items-center gap-2">
+                <span class="text-xs font-bold text-gray-400 uppercase">Total:</span>
+                <span class="text-xs font-black text-[#0B1F33]">{{ AllUsser.length }} Users</span>
+             </div>
+        </div>
+    </div>
 
-        <!-- Header -->
-        <div class="card-header bg-white py-3 d-flex justify-content-between align-items-center">
-            <h5 class="mb-0 fw-bold text-dark">Manage Users</h5>
-            <!-- <button class="btn btn-primary btn-sm px-3">
-        Add New User
-      </button> -->
+    <div class="bg-white rounded-3xl shadow-sm border border-gray-100 overflow-hidden">
+        <div class="overflow-x-auto">
+            <table class="w-full">
+                <thead class="bg-gray-50/50 text-gray-400 uppercase text-[10px] font-black tracking-widest">
+                    <tr>
+                        <th class="text-left py-5 px-8">User Profile</th>
+                        <th class="text-left py-5 px-8">Contact Information</th>
+                        <th class="text-left py-5 px-8 text-center">User ID</th>
+                        <th class="text-center py-5 px-8">Actions</th>
+                    </tr>
+                </thead>
+                <tbody class="divide-y divide-gray-50">
+                    <tr *ngFor="let user of pagedBookings" class="hover:bg-gray-50/50 transition-colors group">
+                        
+                        <td class="py-5 px-8">
+                            <div class="flex items-center gap-4">
+                                <div class="w-11 h-11 rounded-2xl bg-gradient-to-br from-blue-500 to-indigo-600 text-white flex items-center justify-center font-bold text-sm shadow-lg shadow-blue-100 border-2 border-white transition-transform group-hover:scale-110">
+                                    {{ user.fullName.charAt(0) }}
+                                </div>
+                                <div>
+                                    <p class="font-bold text-slate-700 tracking-tight">{{ user.fullName }}</p>
+                                    <span class="text-[10px] px-2 py-0.5 bg-emerald-50 text-emerald-600 rounded-md font-bold uppercase">Active Customer</span>
+                                </div>
+                            </div>
+                        </td>
+
+                        <td class="py-5 px-8">
+                            <div class="flex flex-col gap-1">
+                                <div class="flex items-center gap-2 text-gray-600">
+                                    <i class="far fa-envelope text-[10px] text-gray-400"></i>
+                                    <span class="text-xs font-medium">{{ user.email }}</span>
+                                </div>
+                                <div class="flex items-center gap-2 text-gray-500">
+                                    <i class="fas fa-phone-alt text-[10px] text-gray-400"></i>
+                                    <span class="text-[11px]">{{ user.phoneNumber }}</span>
+                                </div>
+                            </div>
+                        </td>
+
+                        <td class="py-5 px-8 text-center">
+                            <span class="font-mono text-[11px] font-bold text-slate-400 bg-slate-50 px-2 py-1 rounded-lg border border-gray-100">
+                                {{ user.userId }}
+                            </span>
+                        </td>
+
+                        <td class="py-5 px-8 text-center">
+                            <button (click)="deleteUser(user.userId)" 
+                                    class="p-2.5 text-rose-500 hover:bg-rose-50 hover:text-rose-600 rounded-xl transition-all border border-transparent hover:border-rose-100" 
+                                    title="Remove User">
+                                <i class="fas fa-user-minus"></i>
+                            </button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
         </div>
 
-        <!-- Body -->
-        <div class="card-body p-0">
-            <div class="table-responsive">
-                <table class="table table-hover align-middle mb-0">
-                    <thead class="bg-light text-muted uppercase">
-                        <tr>
-                            <th class="ps-4 py-3" style="font-size:12px;">User Info</th>
-                            <th class="py-3" style="font-size:12px;">Email</th>
-                            <th class="py-3" style="font-size:12px;">Phone</th>
-                            <th class="text-center py-3 pe-4" style="font-size:12px;">Actions</th>
-                        </tr>
-                    </thead>
+        <div class="px-8 py-5 bg-gray-50/30 border-t border-gray-50 flex flex-col sm:flex-row justify-between items-center gap-4">
+            <p class="text-[10px] font-black text-gray-400 uppercase tracking-widest">
+                Displaying Page {{currentPage}} of {{totalPages}}
+            </p>
+            
+            <div class="flex gap-1 items-center">
+                <button (click)="prevPage()" [disabled]="currentPage === 1"
+                        class="w-9 h-9 flex items-center justify-center border border-gray-200 rounded-xl bg-white hover:bg-gray-50 disabled:opacity-40 transition-all text-gray-600 shadow-sm">
+                    <i class="fas fa-chevron-left text-[10px]"></i>
+                </button>
 
-                    <tbody>
-                        <tr *ngFor="let user of pagedBookings">
-
-                            <!-- User Info -->
-                            <td class="ps-4">
-                                <div class="d-flex align-items-center">
-                                    <div class="rounded-circle bg-primary text-white d-flex align-items-center justify-content-center me-3"
-                                        style="width:45px;height:45px;font-weight:bold;">
-                                        {{ user.fullName.charAt(0) }}
-                                    </div>
-                                    <div>
-                                        <div class="fw-bold text-dark">{{ user.fullName }}</div>
-                                        <small class="text-muted">User ID: {{ user.userId }}</small>
-                                    </div>
-                                </div>
-                            </td>
-
-                            <!-- Email -->
-                            <td>
-                                <span class="badge bg-light text-dark border">
-                                    {{ user.email }}
-                                </span>
-                            </td>
-
-                            <!-- Phone -->
-                            <td>
-                                <span class="fw-semibold text-dark">
-                                    {{ user.phoneNumber }}
-                                </span>
-                            </td>
-
-                            <!-- Actions -->
-                            <td class="text-center pe-4">
-                                <!-- <button class="btn btn-sm btn-outline-primary me-2">
-                  Edit
-                </button> -->
-                                <button class="btn btn-sm btn-outline-danger" (click)="deleteUser(user.userId)">
-                                    Delete
-                                </button>
-                            </td>
-
-                        </tr>
-                    </tbody>
-                </table>
-
-                <!-- Pagination -->
-                <div class="flex justify-center mt-4 gap-2">
-                    <button (click)="prevPage()" [disabled]="currentPage === 1"
-                        class="px-3 py-1 border rounded hover:bg-gray-100">
-                        Prev
-                    </button>
-
-                    <button *ngFor="let page of [].constructor(totalPages); let i = index" (click)="goToPage(i + 1)"
-                        [ngClass]="{
-              'bg-blue-500 text-white': currentPage === (i + 1),
-              'bg-white text-gray-700': currentPage !== (i + 1)
-            }" class="px-3 py-1 border rounded hover:bg-gray-100">
+                <div class="flex gap-1 mx-2">
+                    <button *ngFor="let page of [].constructor(totalPages); let i = index" 
+                            (click)="goToPage(i + 1)" 
+                            [ngClass]="{
+                                'bg-[#0B1F33] text-white border-[#0B1F33] shadow-md scale-110': currentPage === (i + 1),
+                                'bg-white text-gray-500 border-gray-200 hover:bg-gray-50': currentPage !== (i + 1)
+                            }" class="w-9 h-9 flex items-center justify-center border rounded-xl text-xs font-bold transition-all">
                         {{ i + 1 }}
-                    </button>
-
-                    <button (click)="nextPage()" [disabled]="currentPage === totalPages"
-                        class="px-3 py-1 border rounded hover:bg-gray-100">
-                        Next
                     </button>
                 </div>
 
+                <button (click)="nextPage()" [disabled]="currentPage === totalPages" 
+                        class="w-9 h-9 flex items-center justify-center border border-gray-200 rounded-xl bg-white hover:bg-gray-50 disabled:opacity-40 transition-all text-gray-600 shadow-sm">
+                    <i class="fas fa-chevron-right text-[10px]"></i>
+                </button>
             </div>
         </div>
-
-        <!-- Footer -->
-        <div class="card-footer bg-white text-muted py-3">
-            <small>Total Users: {{ AllUsser.length }}</small>
-        </div>
-
     </div>
 </div>

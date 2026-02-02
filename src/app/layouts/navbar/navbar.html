@@ -1,140 +1,77 @@
-<nav class="bg-[#0F2A44] shadow-md h-13">
-  <div
-    class="max-w-screen-2xl flex flex-wrap items-center justify-between mx-auto px-3"
-  >
-    <a
-      routerLink="/home"
-      class="flex items-center space-x-2 rtl:space-x-reverse"
-    >
-      <div class="py-2 px-2">
-        <i
-          class="fas fa-gem text-[#C9A24D] text-2xl transition-colors duration-300 hover:text-[#ffaf03]"
-        ></i>
-        <span
-          class="text-[#C9A24D] font-serif text-xl transition-colors duration-300 hover:text-[#ffaf03] tracking-wide"
-        >
-          A&K Hotel
-        </span>
-      </div>
+<nav class="bg-[#0B1F33] shadow-lg sticky top-0 z-[100] border-b border-[#C9A24D]/20">
+  <div class="max-w-screen-2xl relative flex items-center mx-auto px-6 py-3">
+
+    <!-- Logo (Left) -->
+    <a routerLink="/home" class="flex items-center space-x-3 group z-10">
+      <i class="fas fa-gem text-[#C9A24D] text-2xl transition-transform duration-300 group-hover:scale-110 group-hover:rotate-12"></i>
+      <span class="ms-2 text-[#C9A24D] font-serif text-2xl font-bold tracking-widest uppercase">
+        A&K <span class="text-white font-light text-lg">Grand Hotel</span>
+      </span>
     </a>
 
+    <!-- Mobile Toggle -->
     <button
       data-collapse-toggle="navbar-default"
       type="button"
-      class="inline-flex items-center p-1.5 w-9 h-9 justify-center text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-gray-300"
-      aria-controls="navbar-default"
-      aria-expanded="false"
+      class="ml-auto inline-flex items-center p-2 w-10 h-10 justify-center text-[#C9A24D] rounded-lg md:hidden hover:bg-[#163552] focus:outline-none transition-all"
     >
-      <svg
-        class="w-5 h-5"
-        aria-hidden="true"
-        xmlns="http://www.w3.org/2000/svg"
-        fill="none"
-        viewBox="0 0 17 14"
-      >
-        <path
-          stroke="currentColor"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          stroke-width="2"
-          d="M1 1h15M1 7h15M1 13h15"
-        />
+      <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+          d="M4 6h16M4 12h16m-7 6h7" />
       </svg>
     </button>
 
-    <div class="hidden flex-grow w-full md:flex md:w-auto" id="navbar-default">
-      @if(isLogin()){
-      <ul
-        class="capitalize flex flex-col md:flex-row md:space-x-6 mx-auto items-center py-2 md:py-0 mt-1 rounded-lg"
-      >
-        <li>
-          <a
-            routerLink="/home"
-            routerLinkActive="nav-active"
-            class="block py-2 px-4 text-white rounded-sm"
-            >home</a
-          >
-        </li>
-        <li>
-          <a
-            routerLink="/rooms"
-            routerLinkActive="nav-active"
-            class="block py-2 px-4 text-white rounded-sm"
-            >Rooms</a
-          >
-        </li>
-        <li>
-          <a
-            routerLink="/booking"
-            routerLinkActive="nav-active"
-            class="block py-2 px-4 text-white rounded-sm"
-            >Booking</a
-          >
-        </li>
-        <li>
-          <a
-            routerLink="/connectUs"
-            routerLinkActive="nav-active"
-            class="block py-2 px-4 text-white rounded-sm"
-            >ConnectUs</a
-          >
-        </li>
-        <li>
-          <a
-            routerLink="/about"
-            routerLinkActive="nav-active"
-            class="block py-2 px-4 text-white rounded-sm"
-            >About</a
-          >
-        </li>
+    <!-- Centered Links -->
+    <div class="hidden md:flex absolute left-1/2 -translate-x-1/2" id="navbar-default">
+      @if (isLogin()) {
+      <ul class="text-white flex items-center space-x-10 font-medium tracking-wide">
+        <li><a routerLink="/home" routerLinkActive="text-[#C9A24D] after:scale-x-100" 
+             class="relative py-2 text-white/80 hover:text-[#C9A24D] transition-all duration-300 uppercase text-xs font-bold after:content-[''] after:absolute after:w-full after:h-[2px] after:bg-[#C9A24D] after:bottom-0 after:left-0 after:scale-x-0 after:transition-transform">Home</a></li>
+        <li><a routerLink="/rooms"routerLinkActive="text-[#C9A24D] after:scale-x-100" 
+             class="relative py-2 text-white/80 hover:text-[#C9A24D] transition-all duration-300 uppercase text-xs font-bold after:content-[''] after:absolute after:w-full after:h-[2px] after:bg-[#C9A24D] after:bottom-0 after:left-0 after:scale-x-0 after:transition-transform">Rooms</a></li>
+        <li><a routerLink="/booking" routerLinkActive="text-[#C9A24D] after:scale-x-100" 
+             class="relative py-2 text-white/80 hover:text-[#C9A24D] transition-all duration-300 uppercase text-xs font-bold after:content-[''] after:absolute after:w-full after:h-[2px] after:bg-[#C9A24D] after:bottom-0 after:left-0 after:scale-x-0 after:transition-transform">Booking</a></li>
+        <li><a routerLink="/connectUs" routerLinkActive="text-[#C9A24D] after:scale-x-100" 
+             class="relative py-2 text-white/80 hover:text-[#C9A24D] transition-all duration-300 uppercase text-xs font-bold after:content-[''] after:absolute after:w-full after:h-[2px] after:bg-[#C9A24D] after:bottom-0 after:left-0 after:scale-x-0 after:transition-transform">Connect</a></li>
+        <li><a routerLink="/about" routerLinkActive="text-[#C9A24D] after:scale-x-100" 
+             class="relative py-2 text-white/80 hover:text-[#C9A24D] transition-all duration-300 uppercase text-xs font-bold after:content-[''] after:absolute after:w-full after:h-[2px] after:bg-[#C9A24D] after:bottom-0 after:left-0 after:scale-x-0 after:transition-transform">About</a></li>
       </ul>
+      }
+    </div>
 
+    <!-- Right Actions -->
+    <ul class="hidden md:flex items-center space-x-4 ml-auto z-10">
+      @if (isGuest) {
+      <li>
+        <a routerLink="/login" class="text-white hover:text-[#C9A24D] px-4 py-2 text-xs font-bold uppercase">
+          Login
+        </a>
+      </li>
+      <li>
+        <a routerLink="/register"
+          class="bg-[#C9A24D] hover:bg-[#b18c3f] text-white px-5 py-2 rounded-full text-xs font-bold uppercase shadow-lg">
+          Register
+        </a>
+      </li>
+      } @else {
+
+      @if (isAdmin) {
+      <li>
+        <a routerLink="/admin"
+          class="flex items-center gap-2 bg-white/10 hover:bg-white/20 text-white px-4 py-2 rounded-lg text-xs font-bold border border-white/10">
+          <i class="fas fa-user-shield text-[#C9A24D]"></i> Admin
+        </a>
+      </li>
       }
 
-      <ul
-        class="items-center capitalize ms-auto flex flex-col p-2 md:p-0 mt-2 rounded-lg md:flex-row md:space-x-0 rtl:space-x-reverse md:mt-0"
-      >
-        @if(isGuest){
-        <li>
-          <a
-            routerLink="/login"
-            routerLinkActive="nav-active "
-            class="block py-1 px-2 text-white rounded-sm"
-            >login</a
-          >
-        </li>
-        <li>
-          <a
-            routerLink="/register"
-            routerLinkActive="nav-active "
-            class="block py-1 px-2 text-white rounded-sm"
-            >register</a
-          >
-        </li>
-        }@else{ 
-          @if(isAdmin){
-        <li>
-          <a
-            routerLink="/admin"
-            routerLinkActive="nav-active "
-            role="button"
-            class="block py-1 px-2 text-white rounded-sm"
-            >Admin</a
-          >
-        </li>
-        }
-        <li>
-          <a
-            routerLink="/logOut"
-            routerLinkActive="nav-active "
-            role="button"
-            class="block py-1 px-2 text-white rounded-sm"
-            (click)="authService.logOUt()"
-            >logOut</a
-          >
-        </li>
-        }
-      </ul>
-    </div>
+      <li>
+        <button (click)="authService.logOUt()"
+          class="flex items-center gap-2 text-red-400 hover:text-red-300 px-4 py-2 text-xs font-bold uppercase">
+          <i class="fas fa-sign-out-alt"></i> Logout
+        </button>
+      </li>
+      }
+    </ul>
+
   </div>
 </nav>

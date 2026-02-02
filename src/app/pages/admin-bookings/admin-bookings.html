@@ -1,76 +1,106 @@
-<div class="bg-white mt-8 rounded-xl shadow-lg border border-gray-100 overflow-hidden">
-    <div class="px-6 py-4 border-b border-gray-50 flex justify-between items-center">
-        <h2 class="text-lg font-bold text-gray-800">All Bookings</h2>
-        <span class="text-xs text-gray-500">Total: {{ allbooking.length }} Bookings</span>
+<div class="bg-white mt-8 rounded-3xl shadow-sm border border-gray-100 overflow-hidden transition-all hover:shadow-md">
+    <div class="px-8 py-6 border-b border-gray-50 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
+        <div>
+            <h2 class="text-xl font-bold text-[#0B1F33]">Reservation Management</h2>
+            <p class="text-xs text-gray-400 mt-1 uppercase tracking-widest font-semibold">Total: {{ allbooking.length }} Bookings Found</p>
+        </div>
+        <div class="flex items-center gap-2 bg-gray-50 px-4 py-2 rounded-xl border border-gray-100">
+            <i class="fas fa-filter text-gray-400 text-xs"></i>
+            <span class="text-xs font-bold text-gray-500 uppercase">Filter</span>
+        </div>
     </div>
 
     <div class="overflow-x-auto">
-        <table class="w-full text-sm">
-            <thead class="bg-gray-50 text-gray-600 uppercase text-[11px] font-semibold tracking-wider">
+        <table class="w-full">
+            <thead class="bg-gray-50/50 text-gray-400 uppercase text-[10px] font-black tracking-widest">
                 <tr>
-                    <th class="text-left py-4 px-6">Guest Details</th>
-                    <th class="text-left py-4 px-6">Room Info</th>
-                    <th class="text-left py-4 px-6">Room Number</th>
-                    <th class="text-left py-4 px-6">Schedule</th>
-                    <th class="text-left py-4 px-6">Current Status</th>
-                    <th class="text-left py-4 px-6">Update Status</th>
+                    <th class="text-left py-5 px-8">Guest Details</th>
+                    <th class="text-left py-5 px-8">Room Type</th>
+                    <th class="text-left py-5 px-8">Unit No.</th>
+                    <th class="text-left py-5 px-8 text-center">Stay Duration</th>
+                    <th class="text-left py-5 px-8">Status</th>
+                    <th class="text-center py-5 px-8">Action</th>
                 </tr>
             </thead>
-            <tbody class="divide-y divide-gray-100">
-                <tr *ngFor="let booking of pagedBookings" class="hover:bg-blue-50/30 transition-colors">
-                    <td class="py-4 px-6 font-medium text-gray-900">{{ booking.guestName }}</td>
-                    <td class="py-4 px-6 text-gray-600">
-                        <span class="bg-gray-100 px-2 py-1 rounded text-xs">{{ booking.room }}</span>
-                    </td>
-                    <td class="py-4 px-6 text-gray-600">
-                        <span class="bg-gray-100 px-2 py-1 rounded text-xs">{{ booking.roomNumber }}</span>
-                    </td>
-                    <td class="py-4 px-6 text-gray-500">
-                        <div class="flex flex-col">
-                            <span>In: {{ booking.checkIn | date:'dd MMM yyyy' }}</span>
-                            <span class="text-[10px] text-gray-400">Out: {{ booking.checkOut | date:'dd MMM yyyy'
-                                }}</span>
+            <tbody class="divide-y divide-gray-50">
+                <tr *ngFor="let booking of pagedBookings" class="hover:bg-gray-50/50 transition-colors group">
+                    <td class="py-5 px-8">
+                        <div class="flex items-center gap-3">
+                            <div class="w-9 h-9 rounded-xl bg-slate-100 text-[#0B1F33] flex items-center justify-center font-bold text-xs border border-gray-200 group-hover:bg-[#0B1F33] group-hover:text-white transition-all">
+                                {{ booking.guestName?.charAt(0) }}
+                            </div>
+                            <span class="font-bold text-slate-700 tracking-tight">{{ booking.guestName }}</span>
                         </div>
                     </td>
-                    <td class="py-4 px-6">
+
+                    <td class="py-5 px-8">
+                        <span class="text-xs font-bold text-slate-500 bg-slate-50 px-3 py-1.5 rounded-lg border border-gray-100">
+                            {{ booking.room }}
+                        </span>
+                    </td>
+
+                    <td class="py-5 px-8">
+                        <span class="font-mono text-sm font-bold text-[#C9A24D]">#{{ booking.roomNumber }}</span>
+                    </td>
+
+                    <td class="py-5 px-8 text-center">
+                        <div class="inline-flex flex-col items-center p-2 bg-blue-50/30 rounded-xl border border-blue-100/50">
+                            <span class="text-[11px] font-bold text-blue-700">{{ booking.checkIn | date:'dd MMM' }}</span>
+                            <div class="w-px h-2 bg-blue-200 my-0.5"></div>
+                            <span class="text-[11px] font-bold text-blue-400">{{ booking.checkOut | date:'dd MMM' }}</span>
+                        </div>
+                    </td>
+
+                    <td class="py-5 px-8">
                         <span [ngClass]="{
-                            'bg-green-100 text-green-700 ring-1 ring-green-200': booking.status === 'Confirmed',
-                            'bg-yellow-100 text-yellow-700 ring-1 ring-yellow-200': booking.status === 'Pending',
-                            'bg-red-100 text-red-700 ring-1 ring-red-200': booking.status === 'Cancelled'
-                        }" class="px-3 py-1 rounded-full text-[11px] font-bold inline-flex items-center">
+                            'bg-emerald-50 text-emerald-600 border-emerald-100': booking.status === 'Confirmed',
+                            'bg-amber-50 text-amber-600 border-amber-100': booking.status === 'Pending',
+                            'bg-rose-50 text-rose-600 border-rose-100': booking.status === 'Cancelled'
+                        }" class="px-3 py-1.5 rounded-lg text-[10px] font-black uppercase border tracking-tighter inline-block min-w-[85px] text-center">
                             {{ booking.status }}
                         </span>
                     </td>
-                    <td class="py-4 px-6">
-                        <select #statusSelect (change)="updateBookingStatus(booking.bookingId, statusSelect.value)"
-                            [value]="booking.status"
-                            class="mx-auto block px-3 py-1.5 text-xs bg-white border border-gray-200 rounded-md focus:ring-2 focus:ring-blue-400 outline-none cursor-pointer">
-                            <option value="Pending"> Pending</option>
-                            <option value="Confirmed"> Confirm</option>
-                            <option value="Cancelled"> Cancel</option>
-                        </select>
+
+                    <td class="py-5 px-8">
+                        <div class="relative max-w-[120px] mx-auto">
+                            <select #statusSelect (change)="updateBookingStatus(booking.bookingId, statusSelect.value)"
+                                [value]="booking.status"
+                                class="w-full appearance-none bg-white border border-gray-200 text-gray-600 py-1.5 px-3 rounded-xl text-xs font-bold focus:ring-2 focus:ring-blue-100 focus:border-blue-400 outline-none cursor-pointer transition-all shadow-sm">
+                                <option value="Pending">🕒 Pending</option>
+                                <option value="Confirmed">✅ Confirm</option>
+                                <option value="Cancelled">❌ Cancel</option>
+                            </select>
+                        </div>
                     </td>
                 </tr>
             </tbody>
         </table>
-        <!-- Pagination -->
-        <div class="flex justify-center mt-4 gap-2">
+    </div>
+
+    <div class="px-8 py-6 bg-gray-50/30 border-t border-gray-50 flex items-center justify-between">
+        <span class="text-xs font-bold text-gray-400 uppercase tracking-widest">Page {{currentPage}} of {{totalPages}}</span>
+        
+        <div class="flex gap-1">
             <button (click)="prevPage()" [disabled]="currentPage === 1"
-                class="px-3 py-1 border rounded hover:bg-gray-100">
-                Prev
+                class="p-2 border border-gray-200 rounded-xl bg-white hover:bg-gray-100 disabled:opacity-50 disabled:cursor-not-allowed transition-all text-gray-600">
+                <i class="fas fa-chevron-left text-[10px]"></i>
             </button>
 
-            <button *ngFor="let page of [].constructor(totalPages); let i = index" (click)="goToPage(i + 1)" [ngClass]="{
-            'bg-blue-500 text-white': currentPage === (i + 1),
-            'bg-white text-gray-700': currentPage !== (i + 1)
-          }" class="px-3 py-1 border rounded hover:bg-gray-100">
-                {{ i + 1 }}
-            </button>
+            <div class="flex gap-1 mx-2">
+                <button *ngFor="let page of [].constructor(totalPages); let i = index" 
+                    (click)="goToPage(i + 1)" 
+                    [ngClass]="{
+                        'bg-[#0B1F33] text-white border-[#0B1F33] shadow-md': currentPage === (i + 1),
+                        'bg-white text-gray-500 border-gray-200 hover:bg-gray-50': currentPage !== (i + 1)
+                    }" class="w-8 h-8 flex items-center justify-center border rounded-xl text-xs font-bold transition-all">
+                    {{ i + 1 }}
+                </button>
+            </div>
 
-            <button (click)="nextPage()" [disabled]="currentPage === totalPages" class="px-3 py-1 border rounded hover:bg-gray-100">
-                Next
+            <button (click)="nextPage()" [disabled]="currentPage === totalPages" 
+                class="p-2 border border-gray-200 rounded-xl bg-white hover:bg-gray-100 disabled:opacity-50 disabled:cursor-not-allowed transition-all text-gray-600">
+                <i class="fas fa-chevron-right text-[10px]"></i>
             </button>
-            </div>
-            
-            </div>
-            </div>
+        </div>
+    </div>
+</div>

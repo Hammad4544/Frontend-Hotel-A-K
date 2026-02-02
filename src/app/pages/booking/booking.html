@@ -1,93 +1,109 @@
-<section>
-    <div class="container mx-auto p-8 bg-[#F9F5F2] min-h-screen">
-        <div class="mb-8 flex justify-between items-center">
-           <div>
-            <h1 class="text-3xl font-bold text-slate-800">My Bookings</h1>
-            <p class="text-slate-500 mt-2">Review your current bookings, dates, and total cost.</p>
-            <hr class="mt-4 border-slate-200">
-           </div> 
+<section class="bg-[#FDFBF9] min-h-screen pb-20">
+    <div class="max-w-7xl mx-auto p-6 md:p-10">
+        
+        <div class="mb-12 flex flex-col md:flex-row justify-between items-start md:items-center gap-6">
+            <div>
+                <h1 class="text-4xl font-serif font-bold text-[#0B1F33]">My Bookings</h1>
+                <p class="text-gray-500 mt-2 font-light">Manage your reservations, check dates, and finalize payments.</p>
+                <div class="h-1 w-20 bg-[#C9A24D] mt-4 rounded-full"></div>
+            </div> 
 
-        <button class="bg-gray-600 hover:bg-red-600 px-6 py-2 rounded-md text-white font-medium flex items-center gap-1 transition-colors" (click)="deleteAllBookings()">
-            <i class="fas fa-trash-can"></i>
-            <span>Remove All Booking</span>
-        </button>
+            @if (bookingList.length > 0) {
+            <button class="group flex items-center gap-2 bg-red-50 text-red-600 hover:bg-red-600 hover:text-white px-6 py-3 rounded-xl font-bold text-xs uppercase tracking-widest transition-all duration-300 shadow-sm" 
+                    (click)="deleteAllBookings()">
+                <i class="fas fa-trash-can transition-transform group-hover:rotate-12"></i>
+                <span>Cancel All Bookings</span>
+            </button>
+            }
         </div>
 
-        
-    
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-    
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
             @for (booking of bookingList; track booking.roomId) {
-            <div class="bg-white border border-slate-200 rounded-xl shadow-sm overflow-hidden flex flex-col">
-    
-                <div class="bg-slate-50 p-4 border-b border-slate-200 flex justify-between items-center">
-                    <h2 class="text-xl font-bold text-slate-700">{{ booking.room.type }}</h2>
+            <div class="bg-white rounded-2xl shadow-sm hover:shadow-xl transition-all duration-500 border border-gray-100 overflow-hidden flex flex-col">
+                
+                <div class="bg-[#0B1F33] p-5 flex justify-between items-center">
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 bg-[#C9A24D] rounded-full flex items-center justify-center text-[#0B1F33]">
+                            <i class="fas fa-hotel"></i>
+                        </div>
+                        <h2 class="text-lg font-serif font-bold text-white">{{ booking.room.type }} Room</h2>
+                    </div>
+                    
+                    <div class="flex gap-2">
+                        <button class="p-2 bg-white/10 hover:bg-white/20 text-white rounded-lg transition-colors" 
+                                title="Update Dates" (click)="startUpdate(booking)">
+                            <i class="fas fa-pen text-sm"></i>
+                        </button>
+                        <button class="p-2 bg-red-500/10 hover:bg-red-500 text-red-500 hover:text-white rounded-lg transition-all" 
+                                title="Remove Booking" (click)="removeBooking(booking.bookingId)">
+                            <i class="fas fa-times text-sm"></i>
+                        </button>
+                    </div>
+                </div>
 
-                    <div class="flex justify-between items-center gap-3">
-                        <button class="text-blue-600 hover:text-blue-800 font-medium flex items-center gap-1"
-                            (click)="startUpdate(booking)">
-                            <i class="fas fa-pen"></i>
-                            <span>Update</span>
-                        </button>
-                        
-                        <button class="text-green-600 hover:text-red-600 font-medium flex items-center gap-1"
-                            (click)="removeBooking(booking.bookingId)">
-                            <i class="fas fa-trash-can"></i>
-                            <span>Remove</span>
-                        </button>
-                        
-                    </div>
-                </div>
-    
-                <div class="p-4 flex gap-4">
-                    <div class="w-1/3">
-                        <img [src]="'/images/2.jpg'" alt="Room Image" class="rounded-lg object-cover h-32 w-full">
-                    </div>
-    
-                    <div class="w-2/3 space-y-2">
-                        <div class="flex justify-between">
-                            <span class="text-slate-500">Check-In:</span>
-                            <span class="font-semibold text-slate-700">{{ booking.checkInDate | date:'mediumDate' }}</span>
+                <div class="p-6">
+                    <div class="flex flex-col md:flex-row gap-6">
+                        <div class="w-full md:w-1/3">
+                            <img [src]="'http://localhost:5192' + booking.room.images[0]" 
+                                 class="rounded-xl object-cover h-40 w-full shadow-inner border border-gray-50" 
+                                 alt="Room Preview">
                         </div>
-                        <div class="flex justify-between">
-                            <span class="text-slate-500">Check-Out:</span>
-                            <span class="font-semibold text-slate-700">{{ booking.checkOutDate | date:'mediumDate' }}</span>
-                        </div>
-                        <div class="flex justify-between">
-                            <span class="text-slate-500">status:</span>
-                            <span class="inline-block" [ngClass]="getStatusClass(booking.status)">
-                                {{ booking.status }}
-                            </span>
-                        </div>
-                        <div class="flex justify-between border-t pt-2">
-                            <span class="text-slate-500">Price/Night:</span>
-                            <span class="font-semibold text-slate-700">{{ booking.room.pricePerNight | currency : "USD" }}</span>
-                        </div>
-    
-                        <div class="flex items-center justify-between mt-4">
-                            <div>
-                                <span class="text-slate-500 block text-sm">Total:</span>
-                                 <span class="text-xl font-bold text-slate-800">
-                                    {{ getTotalPrice(booking.checkInDate, booking.checkOutDate, booking.room.pricePerNight) | currency : "USD" }}
-                                </span> 
+
+                        <div class="w-full md:w-2/3 space-y-4">
+                            <div class="grid grid-cols-2 gap-4">
+                                <div class="bg-gray-50 p-3 rounded-xl border border-gray-100">
+                                    <span class="text-[10px] uppercase font-bold text-gray-400 block mb-1">Check-In</span>
+                                    <span class="text-sm font-bold text-[#0B1F33]">{{ booking.checkInDate | date:'mediumDate' }}</span>
+                                </div>
+                                <div class="bg-gray-50 p-3 rounded-xl border border-gray-100">
+                                    <span class="text-[10px] uppercase font-bold text-gray-400 block mb-1">Check-Out</span>
+                                    <span class="text-sm font-bold text-[#0B1F33]">{{ booking.checkOutDate | date:'mediumDate' }}</span>
+                                </div>
                             </div>
-                            <button (click)="onPay(booking.bookingId)"
-                                class="bg-[#C9A24D] hover:bg-yellow-700 text-white px-6 py-2 rounded-md font-medium transition-colors">
-                                Pay Now
-                            </button>
+
+                            <div class="flex justify-between items-center px-2">
+                                <span class="text-xs font-bold text-gray-400 uppercase tracking-widest">Reservation Status</span>
+                                <span class="px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-tighter shadow-sm" 
+                                      [ngClass]="getStatusClass(booking.status)">
+                                    {{ booking.status }}
+                                </span>
+                            </div>
+
+                            <div class="border-t border-dashed border-gray-200 pt-4 flex items-center justify-between">
+                                <div>
+                                    <span class="text-[10px] font-bold text-gray-400 uppercase block">Total Amount</span>
+                                    <span class="text-2xl font-bold text-[#C9A24D]">
+                                        {{ getTotalPrice(booking.checkInDate, booking.checkOutDate, booking.room.pricePerNight) | currency }}
+                                    </span>
+                                </div>
+                                
+                                @if(booking.status !== 'Paid') {
+                                <button (click)="onPay(booking.bookingId)"
+                                        class="bg-[#0B1F33] hover:bg-[#C9A24D] text-white px-8 py-3 rounded-xl font-bold text-xs uppercase tracking-widest transition-all shadow-lg hover:shadow-[#C9A24D]/30 transform active:scale-95">
+                                    Pay Now
+                                </button>
+                                } @else {
+                                    <div class="flex items-center gap-2 text-green-600 font-bold text-xs uppercase">
+                                        <i class="fas fa-check-circle text-lg"></i> Confirmed
+                                    </div>
+                                }
+                            </div>
                         </div>
                     </div>
                 </div>
-    
             </div>
             } @empty {
-            <div class="col-span-full text-center py-20 bg-slate-50 rounded-xl border-2 border-dashed">
-                <p class="text-slate-500">You don't have any bookings yet.</p>
+            <div class="col-span-full flex flex-col items-center justify-center py-24 bg-white rounded-3xl border-2 border-dashed border-gray-100">
+                <div class="w-20 h-20 bg-gray-50 rounded-full flex items-center justify-center mb-6">
+                    <i class="fas fa-calendar-times text-3xl text-gray-200"></i>
+                </div>
+                <h3 class="text-xl font-serif font-bold text-gray-400">Your suite is waiting...</h3>
+                <p class="text-gray-400 text-sm mt-2 mb-8 italic text-center">You haven't made any reservations yet.</p>
+                <a routerLink="/rooms" class="bg-[#C9A24D] text-white px-8 py-3 rounded-full font-bold text-xs uppercase tracking-widest shadow-lg hover:bg-[#0B1F33] transition-all">
+                    Explore Our Rooms
+                </a>
             </div>
             }
-    
         </div>
     </div>
-
-
 </section>

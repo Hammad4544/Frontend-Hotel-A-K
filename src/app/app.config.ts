@@ -5,7 +5,6 @@ import { provideHttpClient, withFetch, withInterceptors } from '@angular/common/
 import { provideClientHydration, withEventReplay } from '@angular/platform-browser';
 import { provideAnimations } from '@angular/platform-browser/animations';
 import { routes } from './app.routes';
-import { errorsInterceptor } from './core/interceptors/errors/errors-interceptor';
 import { headersInterceptor } from './core/interceptors/headers/headers-interceptor';
 import { provideToastr } from 'ngx-toastr';
 import { provideSweetAlert2 } from "@sweetalert2/ngx-sweetalert2";
@@ -15,7 +14,7 @@ export const appConfig: ApplicationConfig = {
     provideBrowserGlobalErrorListeners(),
     provideZoneChangeDetection({ eventCoalescing: true }),
     provideRouter(routes), provideClientHydration(withEventReplay()),
-    provideHttpClient(withFetch() , withInterceptors([headersInterceptor , errorsInterceptor])),
+    provideHttpClient(withFetch() , withInterceptors([headersInterceptor])),
     provideAnimations(),
     provideToastr(),
     provideSweetAlert2({

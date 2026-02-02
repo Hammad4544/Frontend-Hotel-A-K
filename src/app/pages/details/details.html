@@ -1,137 +1,132 @@
-<!-- slider image -->
-<section>
+<section class="bg-[#FDFBF9] pb-20">
     @if (room) {
-    
-    <div class="max-w-6xl mx-auto mt-10 px-4">
-        <!-- Main Image -->
-        <div class="main-image mb-4 w-full flex justify-center">
+    <div class="max-w-6xl mx-auto pt-10 px-6">
+        <div class="relative group mb-6 overflow-hidden rounded-2xl shadow-2xl">
             <img [src]="'http://localhost:5192' + selectedImage" alt="Room Image"
-                class="object-contain w-full max-h-[500px] rounded-lg shadow-lg" />
+                class="w-full h-[500px] object-cover transition-transform duration-700 group-hover:scale-105" />
+            <div class="absolute inset-0 bg-black/10"></div>
         </div>
     
-        <!-- Thumbnails -->
-        <div class="thumbnails flex justify-center gap-4">
+        <div class="flex justify-center gap-4 px-2 overflow-x-auto pb-4">
             @for (img of room.images; track img) {
-            <img [src]="'http://localhost:5192' + img" (click)="changeImage(img)" [class.active]="img === selectedImage"
-                [class.border-blue-500]="img === selectedImage"
-                class="w-20 h-20 object-cover rounded-lg border-2 cursor-pointer transition-transform duration-200 hover:scale-105"
-                alt="Room Thumbnail" />
+            <div class="relative cursor-pointer group" (click)="changeImage(img)">
+                <img [src]="'http://localhost:5192' + img" 
+                    [class]="img === selectedImage ? 'border-[#C9A24D] ring-2 ring-[#C9A24D]' : 'border-transparent opacity-70'"
+                    class="w-24 h-24 object-cover rounded-xl border-2 transition-all duration-300 hover:opacity-100 shadow-md"
+                    alt="Room Thumbnail" />
+            </div>
             }
         </div>
     </div>
-    
+
+    <div class="max-w-6xl mx-auto mt-12 px-6">
+        <div class="grid lg:grid-cols-3 gap-12">
+            
+            <div class="lg:col-span-2 space-y-10">
+                <div>
+                    <div class="flex items-center gap-2 mb-2">
+                        <span class="bg-[#C9A24D]/10 text-[#C9A24D] text-xs font-bold px-3 py-1 rounded-full uppercase tracking-widest">
+                            Premium Experience
+                        </span>
+                        <div class="flex text-yellow-400 text-sm">
+                            <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                        </div>
+                    </div>
+                    <h1 class="text-4xl md:text-5xl font-serif font-bold text-[#0B1F33] mb-6">
+                        {{ room.type }} Luxury Suite
+                    </h1>
+                    <p class="text-gray-600 leading-relaxed text-lg italic border-l-4 border-[#C9A24D] pl-6 py-2">
+                        {{ room.description }}
+                    </p>
+                </div>
+
+                <hr class="border-gray-100">
+
+                <div>
+                    <h3 class="text-2xl font-serif font-bold text-[#0B1F33] mb-8">Exclusive Amenities</h3>
+                    <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
+                        <div class="group flex flex-col items-center p-4 rounded-2xl bg-white border border-gray-50 shadow-sm transition-all hover:shadow-xl hover:border-[#C9A24D]/20">
+                            <div class="w-12 h-12 flex items-center justify-center bg-[#F9F5F2] rounded-full mb-3 text-[#C9A24D] group-hover:bg-[#C9A24D] group-hover:text-white transition-colors">
+                                <i class="fas fa-wifi text-xl"></i>
+                            </div>
+                            <span class="text-xs font-bold uppercase tracking-tighter text-gray-500">Free Wi-Fi</span>
+                        </div>
+                        <div class="group flex flex-col items-center p-4 rounded-2xl bg-white border border-gray-50 shadow-sm transition-all hover:shadow-xl hover:border-[#C9A24D]/20">
+                            <div class="w-12 h-12 flex items-center justify-center bg-[#F9F5F2] rounded-full mb-3 text-[#C9A24D] group-hover:bg-[#C9A24D] group-hover:text-white transition-colors">
+                                <i class="fas fa-tv text-xl"></i>
+                            </div>
+                            <span class="text-xs font-bold uppercase tracking-tighter text-gray-500">Smart TV</span>
+                        </div>
+                        <div class="group flex flex-col items-center p-4 rounded-2xl bg-white border border-gray-50 shadow-sm transition-all hover:shadow-xl hover:border-[#C9A24D]/20">
+                            <div class="w-12 h-12 flex items-center justify-center bg-[#F9F5F2] rounded-full mb-3 text-[#C9A24D] group-hover:bg-[#C9A24D] group-hover:text-white transition-colors">
+                                <i class="fas fa-cocktail text-xl"></i>
+                            </div>
+                            <span class="text-xs font-bold uppercase tracking-tighter text-gray-500">Mini Bar</span>
+                        </div>
+                        <div class="group flex flex-col items-center p-4 rounded-2xl bg-white border border-gray-50 shadow-sm transition-all hover:shadow-xl hover:border-[#C9A24D]/20">
+                            <div class="w-12 h-12 flex items-center justify-center bg-[#F9F5F2] rounded-full mb-3 text-[#C9A24D] group-hover:bg-[#C9A24D] group-hover:text-white transition-colors">
+                                <i class="fas fa-concierge-bell text-xl"></i>
+                            </div>
+                            <span class="text-xs font-bold uppercase tracking-tighter text-gray-500">24/7 Service</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="relative">
+                <div class="sticky top-24 bg-white rounded-3xl p-8 shadow-2xl border border-gray-100">
+                    <div class="flex justify-between items-end mb-8">
+                        <div>
+                            <span class="text-xs uppercase font-black text-gray-400 tracking-widest">Price / Night</span>
+                            <p class="text-3xl font-bold text-[#C9A24D]">{{ room.pricePerNight | currency }}</p>
+                        </div>
+                        <div class="text-right">
+                            <span class="text-xs font-bold text-green-500 bg-green-50 px-2 py-1 rounded">Available</span>
+                        </div>
+                    </div>
+
+                    <div class="space-y-4">
+                        <div class="group">
+                            <label class="block text-[10px] font-black uppercase text-gray-500 mb-1 ml-2 tracking-widest">Check In</label>
+                            <div class="relative">
+                                <i class="fas fa-calendar-alt absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 group-focus-within:text-[#C9A24D]"></i>
+                                <input type="date" [(ngModel)]="checkInDate" [min]="minDate"
+                                    class="w-full bg-[#F9F5F2] border-none rounded-xl pl-12 pr-4 py-4 text-sm focus:ring-2 focus:ring-[#C9A24D] transition-all" />
+                            </div>
+                        </div>
+
+                        <div class="group">
+                            <label class="block text-[10px] font-black uppercase text-gray-500 mb-1 ml-2 tracking-widest">Check Out</label>
+                            <div class="relative">
+                                <i class="fas fa-calendar-check absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 group-focus-within:text-[#C9A24D]"></i>
+                                <input type="date" [(ngModel)]="checkOutDate" [min]="checkInDate || minDate"
+                                    class="w-full bg-[#F9F5F2] border-none rounded-xl pl-12 pr-4 py-4 text-sm focus:ring-2 focus:ring-[#C9A24D] transition-all" />
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mt-8 pt-6 border-t border-gray-50 space-y-4">
+                        <div class="flex justify-between text-sm">
+                            <span class="text-gray-500 underline">Room Rate</span>
+                            <span class="font-bold text-[#0B1F33]">{{ room.pricePerNight | currency }}</span>
+                        </div>
+                        <div class="flex justify-between text-sm">
+                            <span class="text-gray-500 underline">Taxes & Fees</span>
+                            <span class="font-bold text-[#0B1F33]">$0.00</span>
+                        </div>
+                        <button (click)="bookOrUpdate()" 
+                            class="w-full bg-[#0B1F33] hover:bg-[#C9A24D] text-white font-bold py-4 rounded-xl transition-all duration-300 shadow-lg hover:shadow-[#C9A24D]/40 uppercase tracking-widest text-xs mt-4">
+                            Reserve Room Now
+                        </button>
+                    </div>
+                    
+                    <p class="text-center text-[10px] text-gray-400 mt-4 uppercase tracking-tighter">
+                        No credit card required for initial reservation
+                    </p>
+                </div>
+            </div>
+
+        </div>
+    </div>
     }
 </section>
-
-<section>
-@if (room) {
-
-    <div class="max-w-6xl mx-auto mt-10 px-4">
-
-    <!-- Room Info Section with subtle gradient -->
-    <div class="room-info grid md:grid-cols-2 gap-8 items-start p-6 rounded-lg"
-        style="background: linear-gradient(135deg, #f9f5f2 0%, #e0dcd6 100%);">
-
-        <!-- Left: Room Name & Description -->
-        <div>
-            <h2 class="text-3xl font-semibold text-gray-800 mb-2">{{ room.type }} Room</h2>
-            <div class="h-1 w-30 bg-gray-600 rounded mb-4"></div> 
-            <p class="text-gray-700 leading-relaxed">{{ room.description }} </p>
-
-            <hr class="my-4 border-gray-600" />
-
-            <!-- Amenities Section -->
-            <h2 class="text-xl font-serif text-gray-800 pb-4 ">{{room.type}} Amenities</h2>
-
-            <div class="flex flex-wrap gap-x-8 gap-y-4">
-
-                <div class="flex items-center gap-3 w-[45%]">
-                    <div
-                        class="p-3 bg-gradient-to-br from-blue-100 to-blue-200 rounded-lg shadow-lg hover:from-blue-200 hover:to-blue-300 transition-all duration-300">
-                        <img src="/icons/wifi.svg" alt="Free Wi-Fi" class="h-6">
-                    </div>
-                    <span class="p-3">Free Wi-Fi</span>   
-                </div>
-                
-                <div class="flex items-center gap-3 w-[45%]">
-                    <div
-                        class="p-3 bg-gradient-to-br from-green-100 to-green-200 rounded-lg shadow-lg hover:from-green-200 hover:to-green-300 transition-all duration-300">
-                        <img src="/icons/tv.svg" alt="Flat Screen TV" class="h-6">
-                    </div>
-                    <span class="p-3">Flat Screen TV</span>
-                </div>
-
-                <div class="flex items-center gap-3 w-[45%]">
-                    <div
-                        class="p-3 bg-gradient-to-br from-purple-100 to-purple-200 rounded-lg shadow-lg hover:from-purple-200 hover:to-purple-300 transition-all duration-300">
-                        <img src="/icons/minibar.svg" alt="minibar" class="h-6">
-                    </div>
-                    <span class="p-3">Mini Bar</span>
-                </div>
-                
-                <div class="flex items-center gap-3 w-[45%]">
-                    <div
-                        class="p-3 bg-gradient-to-br from-yellow-100 to-yellow-200 rounded-lg shadow-lg hover:from-yellow-200 hover:to-yellow-300 transition-all duration-300">
-                        <img src="/icons/roomservice.svg" alt="Room Service" class="h-6">
-                    </div>
-                    <span class="p-3">Room Service</span>
-                </div>
-
-            </div>
-
-
-        </div>
-
-        <!-- Right: Room Price and Book Button -->
-        <div class="flex justify-center md:justify-end">
-            <div class="w-full max-w-sm bg-[#f9f5f2] rounded-lg p-6 shadow-lg border border-gray-200">
-                <p class="text-black text-xl font-serif text-center mb-2">Book Your Stay</p>
-                <hr class="pb-2">
-                <!-- Check-in -->
-                <div>
-                    <label class="block text-sm font-medium text-gray-600 mb-1">
-                        Check In
-                    </label>
-                    <input type="date"
-                    [(ngModel)]="checkInDate"
-                    [min]="minDate"
-                        class="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500" />
-                </div>
-
-                <!-- Check-out -->
-                <div>
-                    <label class="block text-sm font-medium text-gray-600 my-2">
-                        Check Out
-                    </label>
-                    <input type="date"
-                    [(ngModel)]="checkOutDate"
-                    [min]="checkInDate || minDate"
-                        class="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500" />
-                </div>
-
-                  
-
-                <button (click)="bookOrUpdate()" class="w-full btn-main border-yellow-500 mt-4">
-                    Book Now
-                </button>
-            </div>
-        </div>
-
-        </div>
-        
-    </div>
-
-
-
-    
-    
-}
-  
-</section>
-
-
-
-    
-
-
-
