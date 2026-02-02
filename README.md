@@ -65,14 +65,13 @@
    cd frontend
    npm install
    ng serve
-```
+  ```
 3. Backend Setup (.NET):
-```
+  ```
   cd backend
   dotnet restore
   dotnet run
-
-```
+  ```
 ## 👥 Project Contributors
 This project is a collaborative effort between:
 
